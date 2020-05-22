@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import Layout from "../components/Layout";
+import HomeContent from "../components/HomeContent";
 
 const Home = (props) => {
   return (
@@ -36,7 +37,21 @@ const Home = (props) => {
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
       </Head>
-      <Layout></Layout>
+      <Layout>
+        <HomeContent></HomeContent>
+      </Layout>
+      <style jsx global>{`
+        * {
+          box-sizing: border-box;
+          font-family: "Roboto Condensed", sans-serif;
+        }
+        body,
+        html {
+          background: rgb(0, 0, 0);
+          margin: 0;
+          padding: 0;
+        }
+      `}</style>
     </div>
   );
 };
