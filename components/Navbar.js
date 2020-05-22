@@ -19,9 +19,12 @@ const Navbar = (props) => {
     }
   };
 
-  const [modal, setModal] = useState(false);
+  const [signInModal, setSignInModal] = useState(false);
+  const [signUpModal, setSignUpModal] = useState(false);
 
-  const toggleSignIn = () => setModal(!modal);
+  const toggleSignIn = () => setSignInModal(!signInModal);
+
+  const toggleSignUp = () => setSignUpModal(!signUpModal);
 
   return (
     <div>
@@ -53,7 +56,7 @@ const Navbar = (props) => {
           <a
             id="signupbtn"
             className="mr-3 text-white"
-            // onClick={toggleSignUp}
+            onClick={toggleSignUp}
             style={{ cursor: "pointer" }}
           >
             SIGN UP
@@ -75,32 +78,176 @@ const Navbar = (props) => {
           ></i>
         </Form>
       </Nav>
-      <Modal isOpen={modal} toggle={toggleSignIn} className={className}>
-        <ModalHeader toggle={toggleSignIn}>Modal title</ModalHeader>
+      <Modal isOpen={signInModal} toggle={toggleSignIn} className={className}>
+        <ModalHeader toggle={toggleSignIn}>SIGN IN</ModalHeader>
         <ModalBody>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          <Form
+            className="needs-validation"
+            novalidate
+            name="signInForm"
+            onsubmit="signInCheck()"
+          >
+            <div className="sign-in-htm">
+              <div className="group">
+                <label
+                  for="validationCustom01"
+                  className="label"
+                  style={{ fontSize: "80%" }}
+                >
+                  USERNAME
+                </label>
+                <input
+                  name="id"
+                  type="text"
+                  className="form-control input"
+                  id="validationCustom01 user"
+                  placeholder="Username"
+                  required
+                />
+                <div className="invalid-feedback">Please provide Username</div>
+              </div>
+
+              <div className="group">
+                <label
+                  for="validationCustom02"
+                  className="label"
+                  style={{ fontSize: "80%" }}
+                >
+                  PASSWORD
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  data-type="password"
+                  className="form-control input"
+                  id="validationCustom02 pass"
+                  placeholder="Password"
+                  required
+                />
+                <div className="invalid-feedback">Please provide Password</div>
+              </div>
+
+              <div className="group"></div>
+            </div>
+          </Form>
         </ModalBody>
         <ModalFooter>
-          <Button
-            color="primary"
-            onClick={() => {
-              authHandler();
-              toggleSignIn();
-            }}
-          >
-            Do Something
-          </Button>{" "}
-          <Button color="secondary" onClick={toggleSignIn}>
-            Cancel
+          <Button class="button" type="submit" style={{ width: "100%" }}>
+            SIGN IN
           </Button>
         </ModalFooter>
       </Modal>
+      <Modal isOpen={signUpModal} toggle={toggleSignUp} className={className}>
+        <ModalHeader toggle={toggleSignUp}>SIGN UP</ModalHeader>
+        <ModalBody>
+          <Form
+            className="needs-validation"
+            novalidate
+            name="signInForm"
+            onsubmit="signInCheck()"
+          >
+            <div className="sign-in-htm">
+              <div className="group">
+                <label
+                  for="validationCustom01"
+                  className="label"
+                  style={{ fontSize: "80%" }}
+                >
+                  USERNAME
+                </label>
+                <input
+                  name="id"
+                  type="text"
+                  className="form-control input"
+                  id="validationCustom01 user"
+                  placeholder="Username"
+                  required
+                />
+                <div className="invalid-feedback">Please provide username</div>
+              </div>
+
+              <div className="group">
+                <label
+                  for="validationCustom02"
+                  className="label"
+                  style={{ fontSize: "80%" }}
+                >
+                  PASSWORD
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  data-type="password"
+                  className="form-control input"
+                  id="validationCustom02 pass"
+                  placeholder="Password"
+                  required
+                />
+                <div className="invalid-feedback">Please provide password</div>
+              </div>
+
+              <div className="group">
+                <label
+                  for="validationCustom02"
+                  className="label"
+                  style={{ fontSize: "80%" }}
+                >
+                  CONFIRM PASSWORD
+                </label>
+                <input
+                  name="password"
+                  type="password"
+                  data-type="password"
+                  className="form-control input"
+                  id="validationCustom02 pass"
+                  placeholder="Confirm Password"
+                  required
+                />
+                <div className="invalid-feedback">
+                  Incorrect confirm password
+                </div>
+              </div>
+
+              <div className="group"></div>
+            </div>
+          </Form>
+        </ModalBody>
+        <ModalFooter>
+          <Button class="button" type="submit" style={{ width: "100%" }}>
+            SIGN UP
+          </Button>
+        </ModalFooter>
+      </Modal>
+      <style jsx global>{`
+        * {
+          box-sizing: border-box;
+          font-family: "Roboto Condensed", sans-serif;
+        }
+        .myform {
+          background: rgba(255, 255, 255, 0);
+          color: white;
+          border: 2px solid white;
+        }
+        .myform::placeholder {
+          color: white;
+          font-size: 1em;
+        }
+        .solid-nav {
+          background-color: rgba(0, 0, 0, 1);
+          /*transition: background-color 1s ease 0s;*/
+        }
+        .tabs [class^="tab"] label,
+        .tabs [class*=" tab"] label {
+          color: rgba(255, 255, 255, 0.4);
+          cursor: pointer;
+          display: block;
+          font-size: 1.1em;
+          font-weight: 300;
+          line-height: 0.1em;
+          padding: 2rem 0;
+          text-align: center;
+        }
+      `}</style>
     </div>
   );
 };
