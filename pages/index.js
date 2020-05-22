@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-// import Navbar from "../components/Navbar";
+import React, { useState } from "react";
+import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Layout from "../components/Layout";
 import { createStore } from "redux";
