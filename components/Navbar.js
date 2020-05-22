@@ -3,9 +3,21 @@ import Link from "next/link";
 import Head from "next/head";
 import { Nav, Form, FormControl } from "react-bootstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { useDispatch } from "react-redux";
+import * as authActions from "../store/action/auth";
 
 const Navbar = (props) => {
   const { buttonLabel, className } = props;
+  const dispatch = useDispatch();
+
+  const authHandler = async () => {
+    let action = authActions.signup("qazwsxedc", "qwerty");
+    try {
+      const test = await dispatch(action);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const [signInModal, setSignInModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
