@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
+    "axios": "^0.19.2",
     "bootstrap": "^4.5.0",
     "head": "^1.0.0",
     "link": "^0.1.5",
@@ -16,7 +17,10 @@
     "react": "16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "16.13.1",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
     "react-helmet": "^6.0.0",
+    "reactstrap": "^8.4.1",
     "save": "^2.4.0"
   },
   "devDependencies": {}
