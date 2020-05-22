@@ -26,6 +26,17 @@ const Layout = (props) => (
         background-color: rgba(0, 0, 0, 1);
         /*transition: background-color 1s ease 0s;*/
       }
+      .tabs [class^="tab"] label,
+      .tabs [class*=" tab"] label {
+        color: rgba(255, 255, 255, 0.4);
+        cursor: pointer;
+        display: block;
+        font-size: 1.1em;
+        font-weight: 300;
+        line-height: 0.1em;
+        padding: 2rem 0;
+        text-align: center;
+      }
     `}</style>
   </div>
 );
