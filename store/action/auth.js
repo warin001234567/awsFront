@@ -5,46 +5,41 @@ export const SIGNUP = "SIGNUP";
 
 export const login = (userid, password) => {
   return async (dispatch) => {
-    const response = await Axios.post("http://localhost:3001/signin", {
+    await Axios.post("http://localhost:3001/signin", {
       username: userid,
       password: password,
-    });
-
-    if (!response.ok) {
-      const erResponse = await response.json();
-      console.log(erResponse);
-    }
-    const resData = await response.json();
-
-    console.log(resData);
-
-    dispatch({
-      type: LOGIN,
-      user: resData.user,
-      token: resData.token,
-    });
+    })
+      .then(async function (response) {
+        console.log(response.data);
+        dispatch({
+          type: LOGIN,
+          user: response.user,
+          token: response.token,
+        });
+      })
+      .catch(function (error) {
+        console.log("Unable to login!!");
+      });
   };
 };
 
 export const signup = (userid, password) => {
   return async (dispatch) => {
-    const response = await Axios.post("http://localhost:3001/signup", {
+    await Axios.post("http://localhost:3001/signup", {
       username: userid,
       password: password,
-    });
-
-    if (!response.ok) {
-      const erResponse = await response.json();
-      console.log(erResponse);
-    }
-    const resData = await response.json();
-
-    console.log(resData);
-
-    dispatch({
-      type: SIGNUP,
-      user: resData.user,
-      token: resData.token,
-    });
+    })
+      .then(async function (response) {
+        console.log(response);
+        dispatch({
+          type: SIGNUP,
+          user: response.user,
+          token: response.token,
+        });
+      })
+      .catch(function (error) {
+        console.log("Unable to signup!!");
+        console.log(error);
+      });
   };
 };

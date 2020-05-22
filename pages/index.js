@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import Navbar from "../components/Navbar";
 import Head from "next/head";
 import Layout from "../components/Layout";
-import { createStore } from "redux";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import authReducer from "../store/reducer/auth";
 import { Provider } from "react-redux";
+import ReduxThunk from "redux-thunk";
 
-const store = createStore(authReducer);
+const rootReducer = combineReducers({
+  auth: authReducer,
+});
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const App = (props) => {
   return (
