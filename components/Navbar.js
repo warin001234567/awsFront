@@ -71,7 +71,7 @@ const Navbar = (props) => {
           ></i>
         </Form>
       </Nav>
-      <Modal isOpen={signInModal} toggle={toggleSignIn} className={className}>
+      <Modal isOpen={signInModal} toggle={toggleSignIn}>
         <ModalHeader toggle={toggleSignIn}>SIGN IN</ModalHeader>
         <ModalBody>
           {showLoginAlert ? (
