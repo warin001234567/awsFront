@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3002",
     "build": "next build",
     "start": "next start"
   },
@@ -18,10 +18,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "16.13.1",
     "react-helmet": "^6.0.0",
-    "react-redux": "^7.2.0",
     "reactstrap": "^8.4.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
     "save": "^2.4.0"
   },
   "devDependencies": {}

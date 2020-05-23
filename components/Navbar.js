@@ -1,24 +1,16 @@
-import React, { Component, useState } from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import Head from "next/head";
-import { Nav, Form, FormControl } from "react-bootstrap";
+import { Nav, Form, FormControl, Alert } from "react-bootstrap";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { useDispatch } from "react-redux";
-import * as authActions from "../store/action/auth";
+import Axios from "axios";
 
 const Navbar = (props) => {
   const { buttonLabel, className } = props;
-  const dispatch = useDispatch();
-
-  const authHandler = async () => {
-    let action = authActions.signup("qazwsxedc", "qwerty");
-    try {
-      const test = await dispatch(action);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showSignupAlert, setShowSignupAlert] = useState(false);
+  const [showLoginAlert, setShowLoginAlert] = useState(false);
   const [signInModal, setSignInModal] = useState(false);
   const [signUpModal, setSignUpModal] = useState(false);
 
@@ -53,6 +45,7 @@ const Navbar = (props) => {
             {" "}
             SIGN IN
           </a>
+
           <a
             id="signupbtn"
             className="mr-3 text-white"
@@ -81,6 +74,17 @@ const Navbar = (props) => {
       <Modal isOpen={signInModal} toggle={toggleSignIn} className={className}>
         <ModalHeader toggle={toggleSignIn}>SIGN IN</ModalHeader>
         <ModalBody>
+          {showLoginAlert ? (
+            <Alert
+              variant="danger"
+              onClose={() => setShowLoginAlert(false)}
+              dismissible
+            >
+              <p>Invalid Username or Password</p>
+            </Alert>
+          ) : (
+            <></>
+          )}
           <Form
             className="needs-validation"
             novalidate
@@ -103,8 +107,10 @@ const Navbar = (props) => {
                   id="validationCustom01 user"
                   placeholder="Username"
                   required
+                  onChange={(value) => {
+                    setUsername(value.target.value);
+                  }}
                 />
-                <div className="invalid-feedback">Please provide Username</div>
               </div>
 
               <div className="group">
@@ -122,9 +128,9 @@ const Navbar = (props) => {
                   className="form-control input"
                   id="validationCustom02 pass"
                   placeholder="Password"
+                  onChange={(value) => setPassword(value.target.value)}
                   required
                 />
-                <div className="invalid-feedback">Please provide Password</div>
               </div>
 
               <div className="group"></div>
@@ -132,13 +138,31 @@ const Navbar = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button class="button" type="submit" style={{ width: "100%" }}>
+          <Button
+            className="button"
+            onClick={() => {
+              signinHandler();
+            }}
+            type="button"
+            style={{ width: "100%" }}
+          >
             SIGN IN
           </Button>
         </ModalFooter>
       </Modal>
       <Modal isOpen={signUpModal} toggle={toggleSignUp} className={className}>
         <ModalHeader toggle={toggleSignUp}>SIGN UP</ModalHeader>
+        {showSignupAlert ? (
+          <Alert
+            variant="danger"
+            onClose={() => setShowSignupAlert(false)}
+            dismissible
+          >
+            <p>Password not match</p>
+          </Alert>
+        ) : (
+          <></>
+        )}
         <ModalBody>
           <Form
             className="needs-validation"
@@ -161,9 +185,9 @@ const Navbar = (props) => {
                   className="form-control input"
                   id="validationCustom01 user"
                   placeholder="Username"
+                  onChange={(value) => setUsername(value.target.value)}
                   required
                 />
-                <div className="invalid-feedback">Please provide username</div>
               </div>
 
               <div className="group">
@@ -181,9 +205,9 @@ const Navbar = (props) => {
                   className="form-control input"
                   id="validationCustom02 pass"
                   placeholder="Password"
+                  onChange={(value) => setPassword(value.target.value)}
                   required
                 />
-                <div className="invalid-feedback">Please provide password</div>
               </div>
 
               <div className="group">
@@ -201,11 +225,9 @@ const Navbar = (props) => {
                   className="form-control input"
                   id="validationCustom02 pass"
                   placeholder="Confirm Password"
+                  onChange={(value) => setConfirmPassword(value.target.value)}
                   required
                 />
-                <div className="invalid-feedback">
-                  Incorrect confirm password
-                </div>
               </div>
 
               <div className="group"></div>
@@ -213,7 +235,14 @@ const Navbar = (props) => {
           </Form>
         </ModalBody>
         <ModalFooter>
-          <Button class="button" type="submit" style={{ width: "100%" }}>
+          <Button
+            class="button"
+            type="button"
+            style={{ width: "100%" }}
+            onClick={() => {
+              signupHandler();
+            }}
+          >
             SIGN UP
           </Button>
         </ModalFooter>
